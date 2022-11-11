@@ -2,7 +2,8 @@
 
 int main()
 {
-    Rationnal number(1, 2);
-    std::cout << number << std::endl;
+    Rationnal number(-5, 0);
+    Rationnal number2(number);
+    std::cout << number2 << std::endl;
     return 0;
 }
