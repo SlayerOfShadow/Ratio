@@ -1,4 +1,6 @@
-#include "../include/Rationnal.h"
+#include <iostream>
+
+#include "Rationnal.h"
 
 int main()
 {

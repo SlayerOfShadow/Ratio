@@ -755,7 +755,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "1"
+			"value" : "4"
 		},
 		{
 			"name" : "CMAKE_OBJCOPY",
@@ -835,67 +835,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "Ratio"
-		},
-		{
-			"name" : "CMAKE_PROJECT_VERSION",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "1.0"
-		},
-		{
-			"name" : "CMAKE_PROJECT_VERSION_MAJOR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "1"
-		},
-		{
-			"name" : "CMAKE_PROJECT_VERSION_MINOR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "0"
-		},
-		{
-			"name" : "CMAKE_PROJECT_VERSION_PATCH",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : ""
-		},
-		{
-			"name" : "CMAKE_PROJECT_VERSION_TWEAK",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : ""
+			"value" : "RationnalTestProject"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1178,7 +1118,87 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "Project_BINARY_DIR",
+			"name" : "DOXYGEN_DOT_EXECUTABLE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Dot tool for use with Doxygen"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "DOXYGEN_DOT_EXECUTABLE-NOTFOUND"
+		},
+		{
+			"name" : "DOXYGEN_EXECUTABLE",
+			"properties" : 
+			[
+				{
+					"name" : "ADVANCED",
+					"value" : "1"
+				},
+				{
+					"name" : "HELPSTRING",
+					"value" : "Doxygen documentation generation tool (http://www.doxygen.org)"
+				}
+			],
+			"type" : "FILEPATH",
+			"value" : "/usr/bin/doxygen"
+		},
+		{
+			"name" : "Examples_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/antoine/Documents/Prog/Projets/Ratio/build/myCode"
+		},
+		{
+			"name" : "Examples_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "OFF"
+		},
+		{
+			"name" : "Examples_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/home/antoine/Documents/Prog/Projets/Ratio/myCode"
+		},
+		{
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_Doxygen",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Details about finding Doxygen"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "[/usr/bin/doxygen][cfound components: doxygen missing components: dot][v1.9.1()]"
+		},
+		{
+			"name" : "RationnalTestProject_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1190,7 +1210,7 @@
 			"value" : "/home/antoine/Documents/Prog/Projets/Ratio/build"
 		},
 		{
-			"name" : "Project_IS_TOP_LEVEL",
+			"name" : "RationnalTestProject_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1202,7 +1222,7 @@
 			"value" : "ON"
 		},
 		{
-			"name" : "Project_SOURCE_DIR",
+			"name" : "RationnalTestProject_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1214,7 +1234,7 @@
 			"value" : "/home/antoine/Documents/Prog/Projets/Ratio"
 		},
 		{
-			"name" : "Ratio_BINARY_DIR",
+			"name" : "Rationnal_BINARY_DIR",
 			"properties" : 
 			[
 				{
@@ -1223,10 +1243,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/antoine/Documents/Prog/Projets/Ratio/build"
+			"value" : "/home/antoine/Documents/Prog/Projets/Ratio/build/INTERFACE"
 		},
 		{
-			"name" : "Ratio_IS_TOP_LEVEL",
+			"name" : "Rationnal_IS_TOP_LEVEL",
 			"properties" : 
 			[
 				{
@@ -1235,10 +1255,10 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "ON"
+			"value" : "OFF"
 		},
 		{
-			"name" : "Ratio_SOURCE_DIR",
+			"name" : "Rationnal_SOURCE_DIR",
 			"properties" : 
 			[
 				{
@@ -1247,7 +1267,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/antoine/Documents/Prog/Projets/Ratio"
+			"value" : "/home/antoine/Documents/Prog/Projets/Ratio/myLib"
 		}
 	],
 	"kind" : "cache",

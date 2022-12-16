@@ -1,0 +1,153 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "myCode",
+					"jsonFile" : "directory-myCode-Debug-a8d20cc8549a2579116c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "myCode",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "INTERFACE",
+					"childIndexes" : 
+					[
+						3
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-INTERFACE-Debug-7b985f0d3af5df071893.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "myLib",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "INTERFACE/doc",
+					"jsonFile" : "directory-INTERFACE.doc-Debug-992b6289bbf885966d48.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 2,
+					"source" : "myLib/doc",
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "RationnalTestProject"
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "Examples",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2,
+						3
+					],
+					"name" : "Rationnal",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "Rationnal::@8f2e06132bc3ad500312",
+					"jsonFile" : "target-Rationnal-Debug-a6a419d569712260f4b2.json",
+					"name" : "Rationnal",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "html::@823755c9640417a52d4c",
+					"jsonFile" : "target-html-Debug-71f06bebc55ecfe3950c.json",
+					"name" : "html",
+					"projectIndex" : 2
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "main::@004304d0377af7c59813",
+					"jsonFile" : "target-main-Debug-a791de333072eb9cc709.json",
+					"name" : "main",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/antoine/Documents/Prog/Projets/Ratio/build",
+		"source" : "/home/antoine/Documents/Prog/Projets/Ratio"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

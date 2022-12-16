@@ -5,6 +5,31 @@
 #include <numeric>
 #include <limits>
 
+// Doxygen menu
+/// \version 0.1
+/// \mainpage
+/// \tableofcontents
+/// \section instroduction_sec What for?
+/// Rationnal is a super tool.
+/// \section install_bigsec How to install
+/// \subsection dependencies_sec Dependecies
+/// \li nothing
+/// \li Doxygen (if you want the documentation)
+/// \subsection install_sec Install with cmake (Linux / Mac)
+/// \li go to main dir
+/// \li mkdir build
+/// \li cd build
+/// \li cmake ..
+/// \li make
+/// \li if Doxygen installed: make html
+/// \li The documentation is located in :
+/// 	- [path to build]/doc/doc-doxygen/html/index.html or 
+/// 	- or [path to build]/INTERFACE/doc/doc-doxygen/html/index.html
+
+
+
+/// \class Rationnal
+/// \brief class defining a rationnal number for linear algebra operations.
 template<typename T, typename U>
 class Rationnal
 {
