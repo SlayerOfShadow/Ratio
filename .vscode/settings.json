@@ -43,7 +43,15 @@
         "numeric": "cpp",
         "random": "cpp",
         "tuple": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "any": "cpp",
+        "ctime": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "optional": "cpp",
+        "iomanip": "cpp",
+        "sstream": "cpp",
+        "variant": "cpp"
     },
     "cmake.configureOnOpen": true,
     "cmake.cmakePath": "cmake"

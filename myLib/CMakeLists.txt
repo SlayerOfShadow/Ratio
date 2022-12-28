@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 # give a name to the project
-project(Rationnal)
+project(Rational)
 
 # automatic get all files in a directory
 file(GLOB_RECURSE source_files src/*.cpp)
@@ -19,18 +19,18 @@ endif()
 # default STATIC ??
 # SHARED to make a .so instead of a .a
 # add_library(ganQ SHARED ${source_files} ${header_files})
-add_library(Rationnal ${source_files} ${header_files})
+add_library(Rational ${source_files} ${header_files})
 
 # compilation flags
-target_compile_features(Rationnal PRIVATE cxx_std_11) # use at least c++ 11
-target_compile_options(Rationnal PRIVATE -Wall -O2)   # specify some compilation flags
+target_compile_features(Rational PRIVATE cxx_std_11) # use at least c++ 11
+target_compile_options(Rational PRIVATE -Wall -O2)   # specify some compilation flags
 
 # include directory
-target_include_directories(Rationnal PUBLIC "include")
+target_include_directories(Rational PUBLIC "include")
 
 # install (optional, install a lib is not mandatory)
-install(FILES ${header_files} DESTINATION /usr/local/include/Rationnal)
-install(TARGETS Rationnal
+install(FILES ${header_files} DESTINATION /usr/local/include/Rational)
+install(TARGETS Rational
         RUNTIME DESTINATION /usr/local/lib
         LIBRARY DESTINATION /usr/local/lib
         ARCHIVE DESTINATION /usr/local/lib)

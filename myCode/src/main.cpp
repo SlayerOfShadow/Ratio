@@ -1,11 +1,11 @@
 #include <iostream>
 
-#include "Rationnal.h"
+#include "Rational.h"
 
 int main()
 {
-    Rationnal number(-5, 0);
-    Rationnal number2(number);
+    Rational number = Rational<int>(5, -2);
+    Rational number2 = Rational<int>(number);
     std::cout << number2 << std::endl;
     return 0;
 }
