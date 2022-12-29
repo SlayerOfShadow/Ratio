@@ -1,3 +1,3 @@
 # Ratio
-A library about rationnal numbers.
+A library about rational numbers.
 Currently under development, be patient...
