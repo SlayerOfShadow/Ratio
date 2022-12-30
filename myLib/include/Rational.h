@@ -107,7 +107,7 @@ class Rational
             {
                 return Rational<T>(real, 1);
             }
-            else if constexpr (std::is_floating_point_v<U>)
+            else if (std::is_floating_point_v<U>)
             {
                 U real_absolute_value = std::abs(real);
             
@@ -118,12 +118,11 @@ class Rational
 
                 if (real_absolute_value < 1)
                 {
-                    return (convert_real_to_ratio<U>(U(1*get_sign(real)/real_absolute_value), nb_iter)).reverse();
+                    return (convert_real_to_ratio<U>(U(1)/real, nb_iter)).reverse();
                 }
                 
                 U real_integer_part = std::floor(real_absolute_value);
                 U floating_part = real_absolute_value - real_integer_part;
-                if (floating_part<1e-10) floating_part=0;
                 return Rational<T>(T(get_sign(real)) * real_integer_part, T(1)) + convert_real_to_ratio<U>(U(get_sign(real))*floating_part, nb_iter - 1);
             }
             else
@@ -190,6 +189,28 @@ class Rational
         constexpr float exp() const
         {
             return std::exp(get_value());
+        }
+
+        constexpr Rational<T> min(const Rational<T>& ratio1, const Rational<T> ratio2) const
+        {
+            return (ratio1 < ratio2 ? ratio1 : ratio2);
+        }
+
+        template<typename... Args>
+        constexpr Rational<T> min(const Rational<T>& ratio, const Args... args) const
+        {
+            return min(ratio, min(args...));
+        }
+
+        constexpr Rational<T> max(const Rational<T>& ratio1, const Rational<T> ratio2) const
+        {
+            return (ratio1 > ratio2 ? ratio1 : ratio2);
+        }
+
+        template<typename... Args>
+        constexpr Rational<T> max(const Rational<T>& ratio, const Args... args) const
+        {
+            return max(ratio, max(args...));
         }
 
         //Operators

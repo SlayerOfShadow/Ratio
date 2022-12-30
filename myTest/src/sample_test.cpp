@@ -14,17 +14,17 @@ TEST (RationalConstructor, valueConstructor) {
     Rational<int> ratio(3, 2);
     ASSERT_EQ (ratio.get_numerator(), 3);
     ASSERT_EQ (ratio.get_denominator(), 2);
-    ASSERT_EQ (ratio.get_value(), double(1.5));
+    ASSERT_EQ (ratio.get_value(), 1.5f);
 
     Rational<int> ratio2(1, 0);
     ASSERT_EQ (ratio2.get_numerator(), 1);
     ASSERT_EQ (ratio2.get_denominator(), 0);
-    ASSERT_EQ (ratio2.get_value(), std::numeric_limits<double>::infinity());
+    ASSERT_EQ (ratio2.get_value(), std::numeric_limits<float>::infinity());
 
     Rational<int> ratio3(-1, 0);
     ASSERT_EQ (ratio3.get_numerator(), -1);
     ASSERT_EQ (ratio3.get_denominator(), 0);
-    ASSERT_EQ (ratio3.get_value(), -std::numeric_limits<double>::infinity());
+    ASSERT_EQ (ratio3.get_value(), -std::numeric_limits<float>::infinity());
 }
 
 TEST (RationalConstructor, copyConstructor) {
@@ -32,13 +32,17 @@ TEST (RationalConstructor, copyConstructor) {
     Rational<int> ratio(ratio2);
     ASSERT_EQ (ratio.get_numerator(), -1);
     ASSERT_EQ (ratio.get_denominator(), 2);
-    ASSERT_EQ (ratio.get_value(), double(-0.5));
+    ASSERT_EQ (ratio.get_value(), -0.5f);
 }
 
 TEST (RationalConstructor, realValueConstructor) {
-    Rational<int> ratio(0.65f);
-    ASSERT_EQ (ratio.get_numerator(), 13);
-    ASSERT_EQ (ratio.get_denominator(), 20);
+    Rational<int> ratio(3);
+    ASSERT_EQ (ratio.get_numerator(), 3);
+    ASSERT_EQ (ratio.get_denominator(), 1);
+
+    Rational<int> ratio3(8.4f);
+    ASSERT_EQ (ratio3.get_numerator(), 42);
+    ASSERT_EQ (ratio3.get_denominator(), 5);
 }
 
 TEST (RationalFunction, getters) {
@@ -50,8 +54,8 @@ TEST (RationalFunction, getters) {
 TEST (RationalFunction, convertRealToRatio) {
     float real = 0.36f;
     Rational<int> ratio = ratio.convert_real_to_ratio<float>(real, default_nb_iter);
-    ASSERT_EQ (ratio.get_numerator(), 18);
-    ASSERT_EQ (ratio.get_denominator(), 5);
+    ASSERT_EQ (ratio.get_numerator(), 9);
+    ASSERT_EQ (ratio.get_denominator(), 25);
 }
 
 TEST (RationalFunction, reverse) {
@@ -117,6 +121,20 @@ TEST (RationalFunction, exp) {
 
     Rational<int> ratio2(1, 1);
     ASSERT_NEAR(ratio2.exp(), 2.7, 0.1);
+}
+
+TEST (RationalFunction, variadicMin) {
+    Rational<int> ratio(8, 9);
+    Rational<int> ratio2(-1, 1);
+    Rational<int> ratio3(5, 3);
+    ASSERT_EQ (ratio.min(ratio, ratio2, ratio3), ratio2);
+}
+
+TEST (RationalFunction, variadicMax) {
+    Rational<int> ratio(8, 9);
+    Rational<int> ratio2(-1, 1);
+    Rational<int> ratio3(5, 3);
+    ASSERT_EQ (ratio.max(ratio, ratio2, ratio3), ratio3);
 }
 
 TEST (RationalOperator, coutOperator) {
