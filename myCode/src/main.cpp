@@ -4,8 +4,7 @@
 
 int main()
 {
-    Rational number = Rational<int>(5, -2);
-    Rational number2 = Rational<int>(number);
-    std::cout << number2 << std::endl;
+    std::cout << "This library was made by Antoine Leblond and Mathurin Rambaud" << std::endl;
+    std::cout << "Please see the documentation on Doxygen before using it. Enjoy!" << std::endl;
     return 0;
 }
