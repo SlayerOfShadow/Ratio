@@ -40,15 +40,27 @@ TEST (RationalConstructor, realValueConstructor) {
     ASSERT_EQ (ratio.get_numerator(), 3);
     ASSERT_EQ (ratio.get_denominator(), 1);
 
-    Rational<int> ratio3(8.4f);
-    ASSERT_EQ (ratio3.get_numerator(), 42);
-    ASSERT_EQ (ratio3.get_denominator(), 5);
+    Rational<int> ratio2(8.4f);
+    ASSERT_EQ (ratio2.get_numerator(), 42);
+    ASSERT_EQ (ratio2.get_denominator(), 5);
+
+    Rational<int> ratio3(-13.54f);
+    ASSERT_EQ (ratio3.get_numerator(), -677);
+    ASSERT_EQ (ratio3.get_denominator(), 50);
 }
 
 TEST (RationalFunction, getters) {
     Rational<int> ratio(4, -7);
     ASSERT_EQ (ratio.get_numerator(), -4);
     ASSERT_EQ (ratio.get_denominator(), 7);
+}
+
+TEST (RationalFunction, floatValue) {
+    Rational<int> ratio(1, -3);
+    ASSERT_NEAR (ratio.get_value(), -0.33, 0.01);
+
+    Rational<int> ratio2(7, 4);
+    ASSERT_EQ (ratio2.get_value(), 1.75);
 }
 
 TEST (RationalFunction, convertRealToRatio) {
@@ -104,15 +116,18 @@ TEST (RationalFunction, floor) {
 }
 
 TEST (RationalFunction, sin) {
-    //TODO
+    Rational<int> ratio = ratio.convert_real_to_ratio<double>(M_PI/3, default_nb_iter);
+    ASSERT_NEAR(ratio.sin(), 0.866f, 0.001f);
 }
 
 TEST (RationalFunction, cos) {
-    //TODO
+    Rational<int> ratio = ratio.convert_real_to_ratio<double>(M_PI/3, default_nb_iter);
+    ASSERT_NEAR(ratio.cos(), 0.5f, 0.001f);
 }
 
 TEST (RationalFunction, tan) {
-    //TODO
+    Rational<int> ratio = ratio.convert_real_to_ratio<double>(M_PI/3, default_nb_iter);
+    ASSERT_NEAR(ratio.tan(), 1.732f, 0.001f);
 }
 
 TEST (RationalFunction, exp) {
@@ -149,6 +164,16 @@ TEST (RationalOperator, equalOperator) {
     Rational<int> ratio2 = ratio;
     ASSERT_EQ (ratio2.get_numerator(), 2);
     ASSERT_EQ (ratio2.get_denominator(), 3);
+
+    Rational<int> ratio3;
+    ratio3 = 3.7f;
+    ASSERT_EQ (ratio3.get_numerator(), 37);
+    ASSERT_EQ (ratio3.get_denominator(), 10);
+
+    Rational<int> ratio4(-1.12);
+    Rational<int> ratio5 = ratio4;
+    ASSERT_EQ (ratio5.get_numerator(), -28);
+    ASSERT_EQ (ratio5.get_denominator(), 25);
 }
 
 TEST (RationalOperator, plusOperator) {
@@ -157,6 +182,11 @@ TEST (RationalOperator, plusOperator) {
     Rational<int> ratio3 = ratio + ratio2;
     ASSERT_EQ (ratio3.get_numerator(), 1);
     ASSERT_EQ (ratio3.get_denominator(), 1);
+
+    Rational<int> ratio4(3, 4);
+    Rational<int> ratio5 = ratio4 + 3.26;
+    ASSERT_EQ (ratio5.get_numerator(), 401);
+    ASSERT_EQ (ratio5.get_denominator(), 100);
 }
 
 TEST (RationalOperator, plusEqualOperator) {
@@ -165,6 +195,11 @@ TEST (RationalOperator, plusEqualOperator) {
     ratio2 += ratio;
     ASSERT_EQ (ratio2.get_numerator(), -1);
     ASSERT_EQ (ratio2.get_denominator(), 8);
+
+    Rational<int> ratio4(3, 4);
+    ratio4 += 3.26;
+    ASSERT_EQ (ratio4.get_numerator(), 401);
+    ASSERT_EQ (ratio4.get_denominator(), 100);
 }
 
 TEST (RationalOperator, unaryMinusArgumentOperator) {
@@ -180,6 +215,11 @@ TEST (RationalOperator, minusOperator) {
     Rational<int> ratio3 = ratio - ratio2;
     ASSERT_EQ (ratio3.get_numerator(), -22);
     ASSERT_EQ (ratio3.get_denominator(), 21);
+
+    Rational<int> ratio4(3, 4);
+    Rational<int> ratio5 = ratio4 - 3.26;
+    ASSERT_EQ (ratio5.get_numerator(), -251);
+    ASSERT_EQ (ratio5.get_denominator(), 100);
 }
 
 TEST (RationalOperator, minusEqualOperator) {
@@ -188,6 +228,11 @@ TEST (RationalOperator, minusEqualOperator) {
     ratio2 -= ratio;
     ASSERT_EQ (ratio2.get_numerator(), -6);
     ASSERT_EQ (ratio2.get_denominator(), 5);
+
+    Rational<int> ratio4(3, 4);
+    ratio4 -= 3.26;
+    ASSERT_EQ (ratio4.get_numerator(), -251);
+    ASSERT_EQ (ratio4.get_denominator(), 100);
 }
 
 TEST (RationalOperator, multiplyOperator) {
@@ -196,6 +241,11 @@ TEST (RationalOperator, multiplyOperator) {
     Rational<int> ratio3 = ratio * ratio2;
     ASSERT_EQ (ratio3.get_numerator(), 8);
     ASSERT_EQ (ratio3.get_denominator(), 21);
+
+    Rational<int> ratio4(3, 4);
+    Rational<int> ratio5 = ratio4 * 3.26;
+    ASSERT_EQ (ratio5.get_numerator(), 489);
+    ASSERT_EQ (ratio5.get_denominator(), 200);
 }
 
 TEST (RationalOperator, multiplyEqualOperator) {
@@ -204,6 +254,11 @@ TEST (RationalOperator, multiplyEqualOperator) {
     ratio2 *= ratio;
     ASSERT_EQ (ratio2.get_numerator(), 8);
     ASSERT_EQ (ratio2.get_denominator(), 5);
+
+    Rational<int> ratio4(3, 4);
+    ratio4 *= 3.26;
+    ASSERT_EQ (ratio4.get_numerator(), 489);
+    ASSERT_EQ (ratio4.get_denominator(), 200);
 }
 
 TEST (RationalOperator, divideOperator) {
@@ -212,6 +267,11 @@ TEST (RationalOperator, divideOperator) {
     Rational<int> ratio3 = ratio / ratio2;
     ASSERT_EQ (ratio3.get_numerator(), -14);
     ASSERT_EQ (ratio3.get_denominator(), 3);
+
+    Rational<int> ratio4(3, 2);
+    Rational<int> ratio5 = ratio4 / 3.2;
+    ASSERT_EQ (ratio5.get_numerator(), 15);
+    ASSERT_EQ (ratio5.get_denominator(), 32);
 }
 
 TEST (RationalOperator, divideEqualOperator) {
@@ -220,6 +280,11 @@ TEST (RationalOperator, divideEqualOperator) {
     ratio2 /= ratio;
     ASSERT_EQ (ratio2.get_numerator(), -5);
     ASSERT_EQ (ratio2.get_denominator(), 2);
+
+    Rational<int> ratio4(3, 2);
+    ratio4 /= 3.2;
+    ASSERT_EQ (ratio4.get_numerator(), 15);
+    ASSERT_EQ (ratio4.get_denominator(), 32);
 }
 
 TEST (RationalOperator, isEqualOperator) {
@@ -228,6 +293,10 @@ TEST (RationalOperator, isEqualOperator) {
     Rational<int> ratio3(3, 6);
     ASSERT_EQ (ratio == ratio2, true);
     ASSERT_EQ (ratio == ratio3, false);
+
+    Rational<int> ratio4(3, 2);
+    float ratio5 = 1.5f;
+    ASSERT_EQ (ratio4 == ratio5, true);
 }
 
 TEST (RationalOperator, isDifferentOperator) {
@@ -236,6 +305,10 @@ TEST (RationalOperator, isDifferentOperator) {
     Rational<int> ratio3(3, 6);
     ASSERT_EQ (ratio != ratio2, false);
     ASSERT_EQ (ratio != ratio3, true);
+
+    Rational<int> ratio4(3, 2);
+    float ratio5 = 3.25f;
+    ASSERT_EQ (ratio4 != ratio5, true);
 }
 
 TEST (RationalOperator, isSuperiorOperator) {
@@ -244,6 +317,10 @@ TEST (RationalOperator, isSuperiorOperator) {
     Rational<int> ratio3(-3, 6);
     ASSERT_EQ (ratio > ratio2, false);
     ASSERT_EQ (ratio > ratio3, true);
+
+    Rational<int> ratio4(7, 2);
+    float ratio5 = 3.25f;
+    ASSERT_EQ (ratio4 > ratio5, true);
 }
 
 TEST (RationalOperator, isSuperiorOrEqualOperator) {
@@ -253,6 +330,10 @@ TEST (RationalOperator, isSuperiorOrEqualOperator) {
     ASSERT_EQ (ratio >= ratio2, true);
     ASSERT_EQ (ratio >= ratio3, true);
     ASSERT_EQ (ratio3 >= ratio2, false);
+
+    Rational<int> ratio4(-6, 2);
+    float ratio5 = 3.25f;
+    ASSERT_EQ (ratio4 >= ratio5, false);
 }
 
 TEST (RationalOperator, isInferiorOperator) {
@@ -261,6 +342,10 @@ TEST (RationalOperator, isInferiorOperator) {
     Rational<int> ratio3(3, 6);
     ASSERT_EQ (ratio < ratio2, true);
     ASSERT_EQ (ratio2 < ratio3, false);
+
+    Rational<int> ratio4(-6, 2);
+    int ratio5 = -3;
+    ASSERT_EQ (ratio4 < ratio5, false);
 }
 
 TEST (RationalOperator, isInferiorOrEqualOperator) {
@@ -270,4 +355,8 @@ TEST (RationalOperator, isInferiorOrEqualOperator) {
     ASSERT_EQ (ratio <= ratio2, true);
     ASSERT_EQ (ratio2 <= ratio3, false);
     ASSERT_EQ (ratio3 <= ratio, true);
+
+    Rational<int> ratio4(-6, 2);
+    int ratio5 = -3;
+    ASSERT_EQ (ratio4 <= ratio5, true);
 }

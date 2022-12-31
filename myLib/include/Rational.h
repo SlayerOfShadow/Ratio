@@ -27,7 +27,8 @@
 /// 	- [path to build]/doc/doc-doxygen/html/index.html or 
 /// 	- or [path to build]/INTERFACE/doc/doc-doxygen/html/index.html
 
-int default_nb_iter = 5;
+int default_nb_iter = 10;
+float default_error_value = 1e-4;
 
 /// \class Rational
 /// \brief class defining a Rational number for linear algebra operations.
@@ -97,19 +98,19 @@ class Rational
         }
 
         template<typename U>
-        constexpr Rational<T> convert_real_to_ratio(const U& real, const uint nb_iter)
+        constexpr Rational<T> convert_real_to_ratio(const U& real, const uint nb_iter) const
         {
-            if (std::is_same_v<U, Rational>)
+            if constexpr (std::is_same_v<U, Rational>)
             {
                 return real;
             } 
-            else if (std::is_integral_v<U>)
+            else if constexpr (std::is_integral_v<U>)
             {
                 return Rational<T>(real, 1);
             }
-            else if (std::is_floating_point_v<U>)
+            else if constexpr (std::is_floating_point_v<U>)
             {
-                U real_absolute_value = std::abs(real);
+                const U real_absolute_value = std::abs(real);
             
                 if (real_absolute_value == 0 || nb_iter == 0)
                 {
@@ -118,12 +119,16 @@ class Rational
 
                 if (real_absolute_value < 1)
                 {
-                    return (convert_real_to_ratio<U>(U(1)/real, nb_iter)).reverse();
+                    return (convert_real_to_ratio<U>(1 / real, nb_iter)).reverse();
                 }
                 
-                U real_integer_part = std::floor(real_absolute_value);
+                const U real_integer_part = std::floor(real_absolute_value);
                 U floating_part = real_absolute_value - real_integer_part;
-                return Rational<T>(T(get_sign(real)) * real_integer_part, T(1)) + convert_real_to_ratio<U>(U(get_sign(real))*floating_part, nb_iter - 1);
+                if (floating_part < default_error_value) //else numerator and denominator get crazy values
+                {
+                    floating_part = 0;
+                }
+                return Rational<T>(get_sign(real) * real_integer_part, 1) + convert_real_to_ratio<U>(get_sign(real) * floating_part, nb_iter - 1);
             }
             else
             {
@@ -139,11 +144,9 @@ class Rational
 
             if (m_numerator != 0)
             {
-                Rational<T> ratio(m_denominator * get_sign(m_numerator), m_numerator * get_sign(m_numerator));
-                return ratio;
+                return Rational<T> (m_denominator * get_sign(m_numerator), m_numerator * get_sign(m_numerator));
             } else {
-                Rational<T> ratio2(0, 1);
-                return ratio2;
+                return Rational<T>();
             }
         }
 
@@ -214,20 +217,26 @@ class Rational
         }
 
         //Operators
-        constexpr void operator=(const Rational<T>& ratio)
+        template<typename U>
+        constexpr void operator=(const U& var)
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             m_numerator = ratio.get_numerator();
             m_denominator = ratio.get_denominator();
         }
 
-        constexpr Rational<T> operator+(const Rational<T>& ratio) const
+        template<typename U>
+        constexpr Rational<T> operator+(const U& var) const
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             return Rational<T>(m_numerator * ratio.get_denominator() + m_denominator * ratio.get_numerator(),
                                 m_denominator * ratio.get_denominator());
         }
 
-        constexpr void operator+=(const Rational<T>& ratio)
+        template<typename U>
+        constexpr void operator+=(const U& var)
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             *this = *this + ratio;
         }
 
@@ -236,64 +245,88 @@ class Rational
             return Rational<T>(-1 * m_numerator, m_denominator);
         }
 
-        constexpr Rational<T> operator-(const Rational<T>& ratio) const
+        template<typename U>
+        constexpr Rational<T> operator-(const U& var) const
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             return Rational<T>(m_numerator * ratio.get_denominator() - m_denominator * ratio.get_numerator(),
                                 m_denominator * ratio.get_denominator());
         }
 
-        constexpr void operator-=(const Rational<T>& ratio)
+        template<typename U>
+        constexpr void operator-=(const U& var)
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             *this = *this - ratio;
         }
 
-        constexpr Rational<T> operator*(const Rational<T>& ratio) const
+        template<typename U>
+        constexpr Rational<T> operator*(const U& var) const
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             return Rational<T>(m_numerator * ratio.get_numerator(), m_denominator * ratio.get_denominator());
         }
 
-        constexpr void operator*=(const Rational<T>& ratio)
+        template<typename U>
+        constexpr void operator*=(const U& var)
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             *this = *this * ratio;
         }
         
-        constexpr Rational<T> operator/(const Rational<T>& ratio) const
+        template<typename U>
+        constexpr Rational<T> operator/(const U& var) const
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             return *this * ratio.reverse();
         }
 
-        constexpr void operator/=(const Rational<T>& ratio)
+        template<typename U>
+        constexpr void operator/=(const U& var)
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             *this = *this / ratio;
         }
 
-        constexpr bool operator==(const Rational<T>& ratio) const
+        template<typename U>
+        constexpr bool operator==(const U& var) const
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             return (m_numerator == ratio.get_numerator() && m_denominator == ratio.get_denominator());
         }
 
-        constexpr bool operator!=(const Rational<T>& ratio) const
+        template<typename U>
+        constexpr bool operator!=(const U& var) const
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             return (m_numerator != ratio.get_numerator() || m_denominator != ratio.get_denominator());
         }
 
-        constexpr bool operator>(const Rational<T>& ratio) const
+        template<typename U>
+        constexpr bool operator>(const U& var) const
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             return (m_numerator * ratio.get_denominator() > m_denominator * ratio.get_numerator());
         }
 
-        constexpr bool operator>=(const Rational<T>& ratio) const
+        template<typename U>
+        constexpr bool operator>=(const U& var) const
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             return (m_numerator * ratio.get_denominator() >= m_denominator * ratio.get_numerator());
         }
 
-        constexpr bool operator<(const Rational<T>& ratio) const
+        template<typename U>
+        constexpr bool operator<(const U& var) const
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             return (m_numerator * ratio.get_denominator() < m_denominator * ratio.get_numerator());
         }
 
-        constexpr bool operator<=(const Rational<T>& ratio) const
+        template<typename U>
+        constexpr bool operator<=(const U& var) const
         {
+            Rational<T> ratio = convert_real_to_ratio<U>(var, default_nb_iter);
             return (m_numerator * ratio.get_denominator() <= m_denominator * ratio.get_numerator());
         }
 };
