@@ -110,7 +110,7 @@ class Rational
             }
             else if constexpr (std::is_floating_point_v<U>)
             {
-                const U real_absolute_value = std::abs(real);
+                U real_absolute_value = std::abs(real);
             
                 if (real_absolute_value == 0 || nb_iter == 0)
                 {
@@ -122,7 +122,7 @@ class Rational
                     return (convert_real_to_ratio<U>(1 / real, nb_iter)).reverse();
                 }
                 
-                const U real_integer_part = std::floor(real_absolute_value);
+                U real_integer_part = std::floor(real_absolute_value);
                 U floating_part = real_absolute_value - real_integer_part;
                 if (floating_part < default_error_value) //else numerator and denominator get crazy values
                 {
@@ -138,14 +138,17 @@ class Rational
 
         constexpr Rational<T> reverse() const
         {
-            if (m_denominator == 0){
+            if (m_denominator == 0)
+            {
 				throw std::invalid_argument("denominator can't be equal to 0");
 			}
 
             if (m_numerator != 0)
             {
                 return Rational<T> (m_denominator * get_sign(m_numerator), m_numerator * get_sign(m_numerator));
-            } else {
+            } 
+            else 
+            {
                 return Rational<T>();
             }
         }
