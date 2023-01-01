@@ -3,7 +3,7 @@
 # Project related configuration options
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING      = UTF-8
-PROJECT_NAME           = Rationnal
+PROJECT_NAME           = Rational
 PROJECT_NUMBER         = 
 OUTPUT_DIRECTORY       = doc-doxygen
 CREATE_SUBDIRS         = NO
